@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/id{id?}', 'UserController@show')->where(['id' => '[0-9]+']);
+Route::get('/form', function(){
+   return view('form');
+});
+Route::post('/form', function(){
+   return ('форма принята');
+});

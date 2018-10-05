@@ -8,11 +8,6 @@ class UserController extends Controller
 {
     public function show($id = null)
     {
-        $message = $id;
-        if (!$id)
-        {
-            $message = "Пользователь не зарегистрирован!";
-        }
-        return view('users.user')->with(['message' => $message]);
+        return view('users.user')->with(['id' => $id]);
     }
 }

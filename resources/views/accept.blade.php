@@ -4,13 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>User</title>
+
+    <title>Form laravel</title>
 </head>
 <body>
-@if (is_null($id))
-    Пользователь не зарегистрирован
-@else
-    {{$id}}
-@endif
+Форма принята!
 </body>
 </html>

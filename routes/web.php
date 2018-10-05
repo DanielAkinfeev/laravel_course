@@ -19,5 +19,5 @@ Route::get('/form', function(){
    return view('form');
 });
 Route::post('/form', function(){
-   return ('форма принята');
+   return view('accept');
 });

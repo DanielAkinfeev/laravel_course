@@ -11,9 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::get('/id{id?}', 'UserController@show')->where(['id' => '[0-9]+']);
 Route::get('/form', function(){
    return view('form');
@@ -21,3 +18,8 @@ Route::get('/form', function(){
 Route::post('/form', function(){
    return view('accept');
 });
+Route::get('/', 'TaskController@show');
+Route::get('/tasks/{id}', 'TaskController@inc')->where(['id' => '[0-9]+']);
+
+Route::get('/queue', 'LogsController@show');
+Route::get('/get', 'LogsController@takeFirstLog');

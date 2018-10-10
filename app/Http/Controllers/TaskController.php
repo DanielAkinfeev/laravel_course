@@ -10,28 +10,15 @@ class TaskController extends Controller
 {
     public function show()
     {
-        return view('task.list')->with(['tasks' => $this->getTasks()]);
-    }
-
-    private function getTasks() {
-        return DB::table('tasks')->get();
+        $tasks = DB::table('tasks')->get();
+        return view('task.list')->with(['tasks' => $tasks]);
     }
 
     public function inc($id)
     {
-        $this->incrementTaskCounter($id);
-        $this->putToLog($id);
-        return redirect()->action('TaskController@show');
-    }
-
-    private function incrementTaskCounter($id)
-    {
         DB::table('tasks')->where('id', $id)->increment('counter');
-    }
-
-    private function putToLog($id)
-    {
-        DB::table('logs')->insert(['task_id' => $id, 'status' => 0, 'created_at' => date('Y-m-d H:i:s')]);
+        DB::table('logs')->insert(['task_id' => $id, 'created_at' => date('Y-m-d H:i:s')]);
+        return redirect()->action('TaskController@show');
     }
 
 }

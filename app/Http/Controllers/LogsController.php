@@ -9,24 +9,13 @@ class LogsController extends Controller
 {
     public function show()
     {
-        return view('queue')->with(['logs' => $this->getLogs()]);
-    }
-
-    private function getLogs() {
-        return DB::table('logs')->orderBy('created_at', 'desc')->where('status', 0)->get();
+        $logs = DB::table('logs')->orderBy('created_at', 'desc')->where('status', 0)->get();
+        return view('queue')->with(['logs' => $logs]);
     }
 
     public function takeFirstLog() {
-        $this->updateFirstLogStatus();
+        $log = DB::table('logs')->orderBy('created_at')->where('status', 0)->first();
+        DB::table('logs')->where('id', $log->id)->where('status', 0)->update(['status' => 1]);
         return redirect()->action('TaskController@show');
-    }
-
-    private function updateFirstLogStatus() {
-        $log = $this->getFirsLog();
-        return DB::table('logs')->where('id', $log->id)->where('status', 0)->update(['status' => 1]);
-    }
-
-    private function getFirsLog() {
-        return DB::table('logs')->orderBy('created_at', 'asc')->where('status', 0)->first();
     }
 }

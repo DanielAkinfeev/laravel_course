@@ -1,16 +1,13 @@
-<style>
-    table, tr, td {
-        border: 1px solid black;
-        border-collapse: collapse;
-    }
-</style>
-<table style="">
+@extends('main')
+@section('title', 'Список работ')
+@section('content')
+<table class="table table-hover">
     <tr>
-        <td>id</td>
-        <td>
+        <td scope="col">id</td>
+        <td scope="col">
             name
         </td>
-        <td>counter</td>
+        <td scope="col">counter</td>
     </tr>
     @foreach($tasks as $task)
         <tr>
@@ -24,6 +21,5 @@
         </tr>
     @endforeach
 </table>
-
 <a href="/get">Принять в работу</a><br>
-<a href="/queue">Очередь</a>
+@endsection

@@ -1,22 +1,20 @@
-<style>
-    table, tr, td {
-        border: 1px solid black;
-        border-collapse: collapse;
-    }
-</style>
-@isset($logs)
-<table>
-    <tr>
-        <td>id</td>
-        <td>task id</td>
-        <td>date create</td>
-    </tr>
-    @foreach($logs as $log)
+@extends('main')
+@section('title', 'Логи')
+@section('content')
+    @isset($logs)
+    <table class="table table-hover">
         <tr>
-            <td>{{$log->id}}</td>
-            <td>{{$log->task_id}}</td>
-            <td>{{$log->created_at}}</td>
+            <td scope="col">id</td>
+            <td scope="col">task id</td>
+            <td scope="col">date create</td>
         </tr>
-    @endforeach
-</table>
-@endisset
+        @foreach($logs as $log)
+            <tr>
+                <td>{{$log->id}}</td>
+                <td>{{$log->task_id}}</td>
+                <td>{{$log->created_at}}</td>
+            </tr>
+        @endforeach
+    </table>
+    @endisset
+@endsection

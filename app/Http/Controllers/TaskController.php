@@ -18,7 +18,7 @@ class TaskController extends Controller
     public function inc($id)
     {
         Task::where('id', $id)->increment('counter');
-        Log::create(['task_id' => $id, 'created_at' => date('Y-m-d H:i:s')]);
+        Log::create(['task_id' => $id]);
         return redirect()->action('TaskController@show');
     }
 

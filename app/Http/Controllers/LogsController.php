@@ -16,7 +16,8 @@ class LogsController extends Controller
 
     public function takeFirstLog() {
         $log = Log::orderBy('created_at')->statusQueued()->first();
-        Log::where('id', $log->id)->update(['status' => 1]);
+        $log->status = 1;
+        $log->save();
         return redirect()->action('TaskController@show');
     }
 }

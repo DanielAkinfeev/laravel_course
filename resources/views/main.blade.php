@@ -1,5 +1,6 @@
 <head>
     <title>@yield('title')</title>
+    <meta name="_token" content="{{ csrf_token() }}"/>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 </head>
 <div class="container">
@@ -12,11 +13,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Главная</a>
+                <a class="navbar-brand" href="/places">Главная</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/queue">Очередь</a></li>
+                    <li><a href="/places/create">Добавить место</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->

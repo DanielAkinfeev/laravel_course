@@ -10,8 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', 'TaskController@show');
-Route::get('/tasks/{id}', 'TaskController@inc')->where(['id' => '[0-9]+']);
-
-Route::get('/queue', 'LogsController@show');
-Route::get('/get', 'LogsController@takeFirstLog');
+Route::get('/places', 'PlacesController@show');
+Route::get('/places/create', 'PlacesController@form');
+Route::post('/places/create', 'PlacesController@create');
+Route::get('/places/{id}', 'PlacesController@detail')->where(['id' => '[0-9]+']);
+Route::get('/places/{id}/photos/add', 'PlacesController@photo')->where(['id' => '[0-9]+']);
+Route::post('/places/{id}/photos/add', 'PlacesController@add')->where(['id' => '[0-9]+']);

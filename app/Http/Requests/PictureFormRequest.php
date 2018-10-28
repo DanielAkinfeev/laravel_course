@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PlaceFormRequest extends FormRequest
+class PictureFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,16 +24,15 @@ class PlaceFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|alpha|unique:places',
+            'file' => 'file|required',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Обязательное поле',
-            'name.alpha' => 'Поле не должно содержать цифры',
-            'name.unique' => 'Такое поле уже есть',
+            'file.required' => 'Обязательное поле',
+            'file.file' => 'Ошибка загрузки с файлом',
         ];
     }
 }

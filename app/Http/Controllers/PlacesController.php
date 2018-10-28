@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PictureFormRequest;
+use App\Http\Requests\PlaceFormRequest;
 use App\Picture;
 use App\Place;
 use Illuminate\Http\Request;
@@ -15,21 +17,9 @@ class PlacesController extends Controller
         return view('places.list')->with(['places' => $places]);
     }
 
-    public function create(Request $request)
+    public function create(PlaceFormRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|alpha|unique:places',
-        ], [
-            'name.required' => 'Обязательное поле',
-            'name.alpha' => 'Поле не должно содержать цифры',
-            'name.unique' => 'Такое поле уже есть',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect('places/create')
-                ->withErrors($validator)
-                ->withInput();
-        }
+        $validator = $request->validated();
 
         Place::create(['name' => $request->name, 'type' => $request->type]);
 
@@ -37,7 +27,7 @@ class PlacesController extends Controller
     }
 
     public function detail($id) {
-        $place = Place::find($id);
+        $place = Place::findOrFail($id);
         $pictures = Picture::orderBy('created_at', 'desc')->where('placeId', $place->id)->get();
         return view('places.detail')->with(['place' => $place, 'pictures' => $pictures]);
     }
@@ -49,20 +39,9 @@ class PlacesController extends Controller
         return view('places.photo.add')->with(['photos' => $photos, 'places' => $places, 'id' => $id]);
     }
 
-    public function add(Request $request)
+    public function add(PictureFormRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'file' => 'file|required',
-        ], [
-            'file.required' => 'Обязательное поле',
-            'file.file' => 'Ошибка загрузки с файлом',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect(Request::path())
-                ->withErrors($validator)
-                ->withInput();
-        }
+        $validator = $request->validated();
 
         $request->file->store('public');
         $name = $request->file->hashName();

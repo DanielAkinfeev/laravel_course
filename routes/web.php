@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', 'PlacesController@show');
 Route::get('/places', 'PlacesController@show');
 Route::get('/places/create', 'PlacesController@form');
 Route::post('/places/create', 'PlacesController@create');

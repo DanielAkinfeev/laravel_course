@@ -47,7 +47,7 @@ class PlacesController extends Controller
         $name = $request->file->hashName();
         Picture::create(['path' => $name, 'placeId' => $request->place]);
 
-        return $this->detail($request->place);
+        return redirect('/');
     }
 
     public function form()

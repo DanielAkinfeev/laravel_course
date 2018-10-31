@@ -24,7 +24,7 @@ class PlaceFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|alpha|unique:places',
+            'name' => 'required|alpha_spaces|unique:places',
         ];
     }
 
@@ -32,7 +32,7 @@ class PlaceFormRequest extends FormRequest
     {
         return [
             'name.required' => 'Обязательное поле',
-            'name.alpha' => 'Поле не должно содержать цифры',
+            'name.alpha_spaces' => 'Поле не должно содержать цифры',
             'name.unique' => 'Такое поле уже есть',
         ];
     }

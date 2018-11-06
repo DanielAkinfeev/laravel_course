@@ -10,10 +10,16 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', 'PlacesController@show');
-Route::get('/places', 'PlacesController@show');
-Route::get('/places/create', 'PlacesController@form');
-Route::post('/places/create', 'PlacesController@create');
-Route::get('/places/{id}', 'PlacesController@detail');
-Route::get('/places/{id}/photos/add', 'PlacesController@photo');
-Route::post('/places/{id}/photos/add', 'PlacesController@add');
+Route::get('/', 'PlacesController@show')->name('places');
+Route::prefix('places')->group(function() {
+    Route::get('/create', 'PlacesController@form')->name('create');
+    Route::post('/create', 'PlacesController@create')->name('post_create');
+    Route::get('/{id}', 'PlacesController@detail')->name('detail');
+    Route::get('/{id}/photos/add', 'PlacesController@photo')->name('photo_add');
+    Route::post('/{id}/photos/add', 'PlacesController@add')->name('photo_form');
+});
+Route::prefix('photos')->group(function() {
+    Route::get('/add', 'PlacesController@photo_add')->name('photo_add_places')->middleware('photoAdd');
+    Route::post('/add', 'PlacesController@add')->name('photo_form');
+});
+

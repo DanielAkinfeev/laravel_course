@@ -3,8 +3,8 @@
 @section('content')
 @foreach($places as $place)
     <div>
-        <a href="/places/{{$place->id}}">
-        {{$place->name}} - {{$place->type}}
+        <a href="{{URL::route('detail', ['id' => $place->id])}}">
+        {{$place->name}} - {{$place->type->name}}
         </a>
     </div><br>
 @endforeach

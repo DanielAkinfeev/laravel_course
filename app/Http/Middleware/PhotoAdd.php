@@ -17,7 +17,7 @@ class PhotoAdd
     public function handle($request, Closure $next)
     {
         $places = Place::all();
-        if (!$places) {
+        if ($places->count() == 0) {
             return redirect()->route('places');
         }
         return $next($request);

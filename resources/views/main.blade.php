@@ -16,9 +16,9 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a @if(URL::previous() == '/places/create') style="font-style: italic" @endif href="/places/create">Добавить место</a></li>
-                    <li><a @if(URL::previous() == '/photos/add') style="font-style: italic" @endif href="/photos/add">Добавить фотографию к месту</a></li>
-                    <li><a @if(URL::previous() == '/') style="font-style: italic" @endif href="/">Все места</a></li>
+                    <li><a @if(URL::current() == URL::route('create')) style="color: red" @endif href="{{URL::route('create')}}">Добавить место</a></li>
+                    <li><a @if(URL::current() == URL::route('photo_add_places')) style="color: red" @endif href="{{URL::route('photo_add_places')}}">Добавить фотографию к месту</a></li>
+                    <li><a @if(URL::current() == URL::route('places')) style="color: red" @endif href="{{URL::route('places')}}">Все места</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->

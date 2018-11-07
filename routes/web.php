@@ -19,7 +19,9 @@ Route::prefix('places')->group(function() {
     Route::post('/{id}/photos/add', 'PlacesController@add')->name('photo_form');
 });
 Route::prefix('photos')->group(function() {
-    Route::get('/add', 'PlacesController@photo_add')->name('photo_add_places')->middleware('photoAdd');
-    Route::post('/add', 'PlacesController@add')->name('photo_form');
+    Route::middleware('photoAdd')->group(function() {
+        Route::get('/add', 'PlacesController@photo_add')->name('photo_add_places');
+        Route::post('/add', 'PlacesController@add_with_places')->name('photo_form_places');
+    });
 });
 

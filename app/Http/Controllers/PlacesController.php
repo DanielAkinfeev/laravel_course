@@ -6,6 +6,7 @@ use App\Http\Requests\PictureFormRequest;
 use App\Http\Requests\PlaceFormRequest;
 use App\Picture;
 use App\Place;
+use App\Type;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -19,21 +20,21 @@ class PlacesController extends Controller
 
     public function create(PlaceFormRequest $request)
     {
-        Place::create(['name' => $request->name, 'type' => $request->type]);
+        Place::create(['name' => $request->name, 'type_id' => $request->type]);
 
         return redirect()->route('places');
     }
 
     public function detail($id) {
         $place = Place::findOrFail($id);
-        $pictures = $place->pictures()->orderBy('created_at', 'desc')->get();
+        $pictures = $place->pictures()->get();
         return view('places.detail')->with(['place' => $place, 'pictures' => $pictures]);
     }
 
     public function photo($id)
     {
-        $photos = Picture::where('place_id', $id)->get();
-        return view('places.photo.add')->with(['photos' => $photos, 'id' => $id]);
+        $place = Place::findOrFail($id);
+        return view('places.photo.add')->with(['photos' => $place->pictures()->get(), 'id' => $id]);
     }
 
     public function photo_add()
@@ -51,8 +52,18 @@ class PlacesController extends Controller
         return redirect()->route('places');
     }
 
+    public function add_with_places(PictureFormRequest $request)
+    {
+        $request->file->store('public');
+        $name = $request->file->hashName();
+        Picture::create(['path' => $name, 'place_id' => $request->place]);
+
+        return redirect()->route('places');
+    }
+
     public function form()
     {
-        return view('places.create');
+        $types = Type::all();
+        return view('places.create')->with(['types' => $types]);
     }
 }

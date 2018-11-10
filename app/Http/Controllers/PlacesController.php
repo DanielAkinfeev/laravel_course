@@ -27,7 +27,7 @@ class PlacesController extends Controller
 
     public function detail($id) {
         $place = Place::findOrFail($id);
-        $pictures = $place->pictures()->get();
+        $pictures = $place->pictures;
         return view('places.detail')->with(['place' => $place, 'pictures' => $pictures]);
     }
 

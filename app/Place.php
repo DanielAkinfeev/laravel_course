@@ -17,4 +17,12 @@ class Place extends Model
     public function type() {
         return $this->belongsTo(Type::class);
     }
+
+    public function gradesPictures() {
+        return $this->hasManyThrough(Grade::class, Picture::class, 'place_id', 'gradetable_id');
+    }
+
+    public function grades() {
+        return $this->morphMany(Grade::class, 'gradetable');
+    }
 }

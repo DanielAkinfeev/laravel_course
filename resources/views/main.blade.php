@@ -19,6 +19,7 @@
                     <li><a @if(URL::current() == URL::route('create')) style="color: red" @endif href="{{URL::route('create')}}">Добавить место</a></li>
                     <li><a @if(URL::current() == URL::route('photo_add_places')) style="color: red" @endif href="{{URL::route('photo_add_places')}}">Добавить фотографию к месту</a></li>
                     <li><a @if(URL::current() == URL::route('places')) style="color: red" @endif href="{{URL::route('places')}}">Все места</a></li>
+                    <li><a @if(URL::current() == URL::route('rate')) style="color: red" @endif href="{{URL::route('rate')}}">Общий рейтинг мест</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->

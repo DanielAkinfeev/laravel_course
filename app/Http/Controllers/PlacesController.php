@@ -7,8 +7,6 @@ use App\Http\Requests\PlaceFormRequest;
 use App\Picture;
 use App\Place;
 use App\Type;
-use Illuminate\Http\Request;
-use Validator;
 
 class PlacesController extends Controller
 {
@@ -27,8 +25,17 @@ class PlacesController extends Controller
 
     public function detail($id) {
         $place = Place::findOrFail($id);
+        $placeGrades = $place->grades->count();
+        $pictureGrades = $place->gradesPictures->count();
+        $total = $placeGrades + $pictureGrades;
+
+        $counts = [
+            "total" => $total,
+            "placeCount" => $placeGrades,
+            "pictureCount" => $pictureGrades,
+        ];
         $pictures = $place->pictures;
-        return view('places.detail')->with(['place' => $place, 'pictures' => $pictures]);
+        return view('places.detail')->with(['place' => $place, 'pictures' => $pictures, 'counts' => $counts]);
     }
 
     public function photo($id)
@@ -65,5 +72,19 @@ class PlacesController extends Controller
     {
         $types = Type::all();
         return view('places.create')->with(['types' => $types]);
+    }
+
+    public function rate()
+    {
+        $places = Place::all();
+        $places = $places->map(function($place) {
+            $item = $place->id;
+            return [
+                'name' => $place->name,
+                'rate' => $place->gradesPictures->count(),
+            ];
+        })->sortByDesc('rate');
+
+        return view('rate')->with(['places' => $places]);
     }
 }

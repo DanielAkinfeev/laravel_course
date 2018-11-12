@@ -25,4 +25,20 @@ class Place extends Model
     public function grades() {
         return $this->morphMany(Grade::class, 'gradetable');
     }
+
+    public function scopeLike($query) {
+        return $query->whereHas('grades', function($q) {
+            $q->where('like', true);
+        });
+    }
+
+    public function scopeDislike($query) {
+        return $query->whereHas('grades', function($q) {
+            $q->where('like', false);
+        });
+    }
+
+    public function getRate() {
+        return $this->gradesPictures()->count() + $this->grades()->count();
+    }
 }

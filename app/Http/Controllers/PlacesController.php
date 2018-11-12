@@ -19,7 +19,6 @@ class PlacesController extends Controller
     public function create(PlaceFormRequest $request)
     {
         Place::create(['name' => $request->name, 'type_id' => $request->type]);
-
         return redirect()->route('places');
     }
 
@@ -81,7 +80,7 @@ class PlacesController extends Controller
             $item = $place->id;
             return [
                 'name' => $place->name,
-                'rate' => $place->gradesPictures->count(),
+                'rate' => $place->getRate(),
             ];
         })->sortByDesc('rate');
 

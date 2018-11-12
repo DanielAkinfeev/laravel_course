@@ -13,4 +13,8 @@ class Picture extends Model
     public function grades() {
         return $this->morphMany(Grade::class, 'gradetable');
     }
+
+    public function getRate() {
+        return $this->grades()->count();
+    }
 }

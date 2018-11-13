@@ -26,13 +26,13 @@ class Place extends Model
         return $this->morphMany(Grade::class, 'gradetable');
     }
 
-    public function scopeLike($query) {
+    public function getLike($query) {
         return $query->whereHas('grades', function($q) {
             $q->where('like', true);
         });
     }
 
-    public function scopeDislike($query) {
+    public function getDislike($query) {
         return $query->whereHas('grades', function($q) {
             $q->where('like', false);
         });

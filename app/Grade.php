@@ -14,4 +14,12 @@ class Grade extends Model
     {
         return $this->morphTo();
     }
+
+    public function scopeLike($query) {
+        return $query->where('like', true);
+    }
+
+    public function scopeDislike($query) {
+        return $query->where('like', false);
+    }
 }

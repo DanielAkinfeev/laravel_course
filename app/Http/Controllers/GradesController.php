@@ -23,7 +23,7 @@ class GradesController extends Controller
     }
 
     public function placeDislike($placeId) {
-        Place::findOrFail($placeId)->grades()->create(['like' => true]);
+        Place::findOrFail($placeId)->grades()->create(['like' => false]);
         return redirect()->route('detail', ['id' => $placeId]);
     }
 }

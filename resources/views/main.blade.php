@@ -16,10 +16,12 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a @if(URL::current() == URL::route('create')) style="color: red" @endif href="{{URL::route('create')}}">Добавить место</a></li>
-                    <li><a @if(URL::current() == URL::route('photo_add_places')) style="color: red" @endif href="{{URL::route('photo_add_places')}}">Добавить фотографию к месту</a></li>
-                    <li><a @if(URL::current() == URL::route('places')) style="color: red" @endif href="{{URL::route('places')}}">Все места</a></li>
-                    <li><a @if(URL::current() == URL::route('rate')) style="color: red" @endif href="{{URL::route('rate')}}">Общий рейтинг мест</a></li>
+                    <li><a @if(URL::current() == URL::route('pictures.create')) style="color: red" @endif href="{{URL::route('create')}}">@lang('messages.add_place')</a></li>
+                    <li><a @if(URL::current() == URL::route('pictures.create')) style="color: red" @endif href="{{URL::route('photo_add_places')}}">@lang('messages.add_picture')</a></li>
+                    <li><a @if(URL::current() == URL::route('places')) style="color: red" @endif href="{{URL::route('places')}}">@lang('messages.all_places')</a></li>
+                    <li><a @if(URL::current() == URL::route('rate')) style="color: red" @endif href="{{URL::route('rate')}}">@lang('messages.places_rate')</a></li>
+                    <li><a href="{{URL::route('places', ['locale' => 'ru'])}}">ru</a></li>
+                    <li><a href="{{URL::route('places', ['locale' => 'en'])}}">en</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->

@@ -10,8 +10,9 @@ use App\Type;
 
 class PlacesController extends Controller
 {
-    public function show()
+    public function show($locale = 'ru')
     {
+        \App::setLocale($locale);
         $places = Place::orderBy('created_at', 'desc')->get();
         return view('places.list')->with(['places' => $places]);
     }
@@ -41,12 +42,6 @@ class PlacesController extends Controller
     {
         $place = Place::findOrFail($id);
         return view('places.photo.add')->with(['photos' => $place->pictures()->get(), 'id' => $id]);
-    }
-
-    public function photo_add()
-    {
-        $places = Place::all();
-        return view('places.photo.addWithPlace')->with(['places' => $places]);
     }
 
     public function add(PictureFormRequest $request)

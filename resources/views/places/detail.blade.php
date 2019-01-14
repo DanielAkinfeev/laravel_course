@@ -14,6 +14,13 @@
         <td>
             <a href="{{URL::route('photo_like', ['photoId' => $picture->id, 'placeId' => $place->id])}}">like</a> -
             <a href="{{URL::route('photo_dislike', ['photoId' => $picture->id, 'placeId' => $place->id])}}">dislike</a>
+            <form action="{{URL::route('pictures.destroy', $picture)}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <input type="submit" value="delete">
+            </form>
+            <br>
+            <a href="{{URL::route('download', $picture)}}">download</a>
         </td>
         </tr>
     @endforeach

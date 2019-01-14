@@ -30,4 +30,6 @@ Route::prefix('pictures')->group(function() {
     });
 });
 
+Route::resource('pictures', 'PictureController');
+Route::get('/download/{picture}', 'PictureController@download')->name('download');
 

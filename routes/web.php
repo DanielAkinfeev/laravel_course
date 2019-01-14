@@ -30,6 +30,6 @@ Route::prefix('pictures')->group(function() {
     });
 });
 
-Route::resource('pictures', 'PictureController');
+Route::resource('pictures', 'PictureController')->except(['update', 'edit', 'show' , 'store', 'index']);
 Route::get('/download/{picture}', 'PictureController@download')->name('download');
 
